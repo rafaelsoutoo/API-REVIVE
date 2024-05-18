@@ -8,7 +8,7 @@ export const app = fastify();
 app.register(appRoutes)
 
 app.setErrorHandler((error, _, reply)=> {
-    if ( error instanceof ZodError){ // se o erro for do zod é error de validação
+    if ( error instanceof ZodError){ //se o erro for do zod é error de validação
         return reply
             .status(400)
             .send({message: 'Validation error.', issues: error.format})
