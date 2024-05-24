@@ -1,5 +1,4 @@
 import fastify from "fastify";
-
 import fastifyJwt from '@fastify/jwt'
 
 
@@ -10,7 +9,6 @@ import { appRoutes } from "./http/controllers/routes";
 
 
 import { FastifyReply, FastifyRequest } from 'fastify'
-    ;
 
 
 export const app = fastify()

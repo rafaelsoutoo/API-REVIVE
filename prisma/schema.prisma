@@ -22,6 +22,7 @@ model User {
   name String
   email String @unique
   password_hash String
+  role          Role     @default(USER)
   created_at DateTime @default(now())
 
   @@map("users")
