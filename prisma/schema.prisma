@@ -25,5 +25,19 @@ model User {
   role          Role     @default(USER)
   created_at DateTime @default(now())
 
+  //um User pode ter varios vicios
+  vices Vice[]
   @@map("users")
+}
+
+model Vice {
+  id String @id @default(uuid())
+  name String
+  date DateTime @updatedAt 
+  created_at DateTime @default(now())
+
+  user User @relation(fields: [user_id], references: [id])
+  user_id String
+
+  @@map("vices")
 }

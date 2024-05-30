@@ -4,9 +4,14 @@ import { UsersRepository } from "../users-repository";
 
 export class PrismaUsersRepository implements UsersRepository {
   
-  findById(id: string): Promise<User| null> {
-    throw new Error ('jkbasjdkbajsb')
-    
+  async findById(id: string){
+    const user = await prisma.user.findUnique({
+      where: {
+        id,
+      },
+    })
+
+    return user
   }
   
   async findByEmail(email: string) {
@@ -17,7 +22,7 @@ export class PrismaUsersRepository implements UsersRepository {
     });
 
     return user
-  } //todos operações do database sempre pasaram nos repositorios
+  } 
   
   async create(data: Prisma.UserCreateInput) {
     const user = await prisma.user.create({
