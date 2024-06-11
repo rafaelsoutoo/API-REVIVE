@@ -6,12 +6,16 @@ import { ViceExistError } from '@/use-cases/error/vice-error';
 
 export async function createVice(request: FastifyRequest, reply: FastifyReply) {
     
-    const viceCreateBodySchema = z.object({
+    const viceCreateParmsSchema = z.object({
 		userId: z.string(),
+	});
+
+    const viceCreateBodySchema = z.object({
 		name: z.string().min(1, { message: "Name cannot be empty" }),
 	});
 
-    const { name, userId } = viceCreateBodySchema.parse(request.body);
+	const {userId} = viceCreateParmsSchema.parse(request.params)
+    const { name } = viceCreateBodySchema.parse(request.body);
 
     try {
 		const createViceUserCase = makeViceUseCase()
@@ -23,10 +27,7 @@ export async function createVice(request: FastifyRequest, reply: FastifyReply) {
 		return reply.status(201).send(vice)
 
 	} catch (err) {
-		if (err instanceof UserNotExistError) {
-			return reply.status(409).send({ message: err.message })
-		}
-		if (err instanceof ViceExistError) {
+		if (err instanceof UserNotExistError || err instanceof ViceExistError) {
 			return reply.status(409).send({ message: err.message })
 		}
 		throw err

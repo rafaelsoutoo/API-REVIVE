@@ -8,5 +8,5 @@ export async function appRoutes(app: FastifyInstance) {
 
     app.post('/users', register)
 
-    app.post('/create/vice', createVice)
+    app.post('/create/vice/:userId', createVice)
 }
