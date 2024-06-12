@@ -14,10 +14,10 @@ export async function createVice(request: FastifyRequest, reply: FastifyReply) {
 		name: z.string().min(1, { message: "Name cannot be empty" }),
 	});
 
-	const {userId} = viceCreateParmsSchema.parse(request.params)
-    const { name } = viceCreateBodySchema.parse(request.body);
-
     try {
+		const {userId} = viceCreateParmsSchema.parse(request.params)
+		const { name } = viceCreateBodySchema.parse(request.body);
+		
 		const createViceUserCase = makeViceUseCase()
 
 		const vice = await createViceUserCase.execute({
