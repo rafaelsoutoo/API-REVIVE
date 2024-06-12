@@ -1,6 +1,6 @@
 import z from 'zod'
 import { FastifyRequest, FastifyReply } from "fastify";
-import { makeViceUseCase} from '@/use-cases/factories/make-vide-use-case';
+import { makeCreateViceUseCase } from '@/use-cases/factories/make-create-vice-use-case'; 
 import { UserNotExistError } from '@/use-cases/error/user-error';
 import { ViceExistError } from '@/use-cases/error/vice-error';
 
@@ -18,7 +18,7 @@ export async function createVice(request: FastifyRequest, reply: FastifyReply) {
 		const {userId} = viceCreateParmsSchema.parse(request.params)
 		const { name } = viceCreateBodySchema.parse(request.body);
 		
-		const createViceUserCase = makeViceUseCase()
+		const createViceUserCase = makeCreateViceUseCase()
 
 		const vice = await createViceUserCase.execute({
 			name, userId

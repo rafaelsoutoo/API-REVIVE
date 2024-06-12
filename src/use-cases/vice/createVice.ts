@@ -1,8 +1,8 @@
 import { UsersRepository } from "@/repositories/users-repository";
 import { ViceRepository } from "@/repositories/vice-repository";
-import { UserNotExistError } from "./error/user-error";
+import { UserNotExistError } from "../error/user-error"; 
 import { Vice } from "@prisma/client";
-import { ViceExistError } from "./error/vice-error";
+import { ViceExistError } from "../error/vice-error"; 
 
 
 interface RegisterViceRequest {
@@ -14,7 +14,7 @@ interface ViceUseCaseResponse {
     vice: Vice
 }
 
-export class ViceUseCase {
+export class CreateViceUseCase {
     constructor(private viceRepository: ViceRepository, private usersRepository: UsersRepository) {}
 
     async execute({

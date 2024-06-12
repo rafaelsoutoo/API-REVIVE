@@ -9,6 +9,7 @@ import { appRoutes } from "./http/controllers/routes";
 
 
 import { FastifyReply, FastifyRequest } from 'fastify'
+import { viceRoutes } from "./http/controllers/Vice/routes";
 
 
 export const app = fastify()
@@ -22,7 +23,7 @@ app.register(fastifyJwt, {
 })
 
 
-app.register(appRoutes)
+app.register(appRoutes, viceRoutes)
 
 
 

@@ -11,6 +11,15 @@ export class PrismaViceRepository implements ViceRepository{
         return vice
     }
 
+    async findViceByIdUser(userId: string){
+      const vice = await prisma.vice.findMany({
+            where: {
+              user_id: userId
+            }
+      })
+      return vice
+    }
+
     async findByName(name: string) {
         const vice = await prisma.vice.findFirst({
           where: {
