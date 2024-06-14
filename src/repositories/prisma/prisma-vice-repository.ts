@@ -29,4 +29,14 @@ export class PrismaViceRepository implements ViceRepository{
     
         return vice
       } 
+
+      async findById(viceId: string) {
+        const vice = await prisma.vice.findUnique({
+            where: {
+              id: viceId,
+            },
+        });
+        return vice;
+    }
+  
 }
