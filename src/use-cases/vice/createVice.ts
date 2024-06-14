@@ -27,12 +27,6 @@ export class CreateViceUseCase {
             throw new UserNotExistError();
         }
 
-        const existingVice = await this.viceRepository.findByName(name);
-
-        if (existingVice) {
-            throw new ViceExistError();
-        }
-
         const vice = await this.viceRepository.create({
             user_id: userId,
             name,
