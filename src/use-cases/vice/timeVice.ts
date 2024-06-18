@@ -1,27 +1,33 @@
 import { ViceRepository } from "@/repositories/vice-repository";
 import { ViceNoExistError } from "../error/vice-error";
 
-export class FindTimeOfVice{
+export class FindTimeOfVice {
     constructor(private viceRepository: ViceRepository) {}
 
-    async execute(viceId: string){
-        const vice = await this.viceRepository.findById(viceId)
+    async execute(viceId: string, reset: boolean = false) {
+        const vice = await this.viceRepository.findById(viceId);
 
         if (!vice) {
             throw new ViceNoExistError();
         }
 
-        const date = vice.date
+        const now = new Date();
 
-        const now = new Date()
-        const time = now.getTime() - new Date(date).getTime()
+        if (reset) {
+            await this.viceRepository.updateDate(viceId, now.toISOString());
 
-        const timeInSeconds = time / 1000
+            return {
+                date: now.toISOString(),
+                timeInSeconds: 0 
+            };
+        }
+
+        const time = now.getTime() - new Date(vice.date).getTime();
+        const timeInSeconds = time / 1000;
 
         return {
-            date,
+            date: vice.date,
             timeInSeconds
-        }
+        };
     }
-
 }

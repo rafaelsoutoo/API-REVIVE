@@ -4,15 +4,20 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
 export async function FindTime(request: FastifyRequest, reply: FastifyReply) {
-    const getQuerySchema = z.object({
+    const paramsSchema = z.object({
         viceId: z.string()
     });
 
+    const bodySchema = z.object({
+        reset: z.boolean().optional().default(false)
+    });
+
     try {
-        const { viceId } = getQuerySchema.parse(request.params);
+        const { viceId } = paramsSchema.parse(request.params);
+        const { reset } = bodySchema.parse(request.body);
 
         const useCase = makeFindTimeViceUseCase();
-        const { date, timeInSeconds } = await useCase.execute(viceId);
+        const { date, timeInSeconds } = await useCase.execute(viceId, reset);
 
         const response = {
             date,
