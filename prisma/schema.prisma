@@ -39,5 +39,21 @@ model Vice {
   user User @relation(fields: [user_id], references: [id])
   user_id String
 
+  economy Economy[]
+
   @@map("vices")
+}
+
+model Economy{
+  id String @id @default(uuid())
+  amount Float
+  created_at DateTime @default(now())
+
+  vice Vice @relation(fields: [vice_id], references: [id])
+  vice_id String
+
+
+
+
+  @@map("economy")
 }
