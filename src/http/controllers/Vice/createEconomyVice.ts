@@ -10,17 +10,18 @@ export async function createEconomy(request: FastifyRequest, reply: FastifyReply
 	});
 
     const economyCreateBodySchema = z.object({
-		amount: z.number().min(1, { message: "Name cannot be empty" }),
+		unit: z.number().min(1, { message: "Unit cannot be empty" }),
+		originalAmount: z.number().min(1, { message: "Amount cannot be empty" }),
 	});
 
     try {
 		const {vice_id} = economyCreateParmsSchema.parse(request.params)
-		const { amount } = economyCreateBodySchema.parse(request.body);
+		const { originalAmount, unit } = economyCreateBodySchema.parse(request.body);
 		
 		const createEconomyUserCase = makeCreateEconomyUseCase()
 
 		const economy = await createEconomyUserCase.execute({
-			vice_id, amount
+			vice_id, originalAmount, unit
 		})
 
 		return reply.status(201).send(economy)

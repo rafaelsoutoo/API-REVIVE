@@ -46,7 +46,9 @@ model Vice {
 
 model Economy{
   id String @id @default(uuid())
-  amount Float
+  unit Int
+  amount Float?
+  originalAmount Float
   created_at DateTime @default(now())
 
   vice Vice @relation(fields: [vice_id], references: [id])

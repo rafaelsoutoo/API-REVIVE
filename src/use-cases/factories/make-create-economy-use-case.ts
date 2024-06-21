@@ -1,6 +1,6 @@
 import { PrismaViceRepository } from "@/repositories/prisma/prisma-vice-repository";
 import { PrismaEconomyRepository } from "@/repositories/prisma/prisma-economy-repository";
-import { EconomyViceUseCase } from "../vice/economyVice";
+import { EconomyViceUseCase } from "../vice/createEconomyVice";
 
 export function makeCreateEconomyUseCase(){
     const viceRepository = new PrismaViceRepository();

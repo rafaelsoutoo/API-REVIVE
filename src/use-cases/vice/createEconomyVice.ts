@@ -4,7 +4,8 @@ import { Economy } from "@prisma/client";
 import { ViceNoExistError } from "../error/vice-error";
 
 interface EconomyUseCaseRequest {
-  amount: number;
+  unit: number
+  originalAmount: number;
   vice_id: string;
 }
 
@@ -19,7 +20,8 @@ export class EconomyViceUseCase {
   ) { }
 
   async execute({
-    amount,
+    unit,
+    originalAmount,
     vice_id,
   }: EconomyUseCaseRequest): Promise<EconomyUseCaseResponse> {
     const vice = await this.viceRepository.findById(vice_id);
@@ -29,11 +31,14 @@ export class EconomyViceUseCase {
     }
 
     const economy = await this.economyRepository.create({
+      unit,
       vice_id,
-      amount,
+      originalAmount,
     });
 
     return { economy }
   }
 }
+
+
 

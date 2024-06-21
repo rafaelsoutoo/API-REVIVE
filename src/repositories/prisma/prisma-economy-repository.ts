@@ -10,4 +10,24 @@ export class PrismaEconomyRepository implements EconomyRepository {
 
     return economy;
   }
+
+  async findById(id: string){
+    const economy = await prisma.economy.findUnique({
+      where: {
+        id,
+      },
+    })
+    return economy
+  }
+
+  async update(economy_id: string, data: Prisma.EconomyUpdateInput) {
+    const updatedEconomy = await prisma.economy.update({
+      where: {
+        id: economy_id,
+      },
+      data,
+    });
+    return updatedEconomy;
+  }
+  
 }
