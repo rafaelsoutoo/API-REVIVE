@@ -18,18 +18,18 @@ export class UpdateAmount {
         const now = new Date();
 
        // Calcular dias desde a criação
-       let daysSinceCreation = Math.floor((now.getTime() - createdAt.getTime()) / (1000 * 60 * 60 * 24));
+    //    let daysSinceCreation = Math.floor((now.getTime() - createdAt.getTime()) / (1000 * 60 * 60 * 24));
 
        // Calcular segundos desde a criação
-      //  let secondsSinceCreation = Math.floor((now.getTime() - createdAt.getTime()) / 1000);
+       let secondsSinceCreation = Math.floor((now.getTime() - createdAt.getTime()) / 1000);
 
 
         let newAmount = 0;
 
-        if (daysSinceCreation > 7) {
-            daysSinceCreation -= 7;
+        if (secondsSinceCreation > 7) {
+            secondsSinceCreation -= 7;
             // Calcular períodos de 7 segundos
-            const periodsOfSevenSeconds = Math.floor(daysSinceCreation / 7);
+            const periodsOfSevenSeconds = Math.floor(secondsSinceCreation / 7);
             const unit = economy.unit;
             newAmount = originalAmount + (originalAmount * periodsOfSevenSeconds) * unit;
         }

@@ -7,7 +7,7 @@ import { z } from "zod";
 
 export async function getViceByUSerId(request: FastifyRequest, reply: FastifyReply) {
     const getQuerySchema = z.object({
-        userId: z.string()
+        userId: z.string(),
     });
 
     const { userId } = getQuerySchema.parse(request.params)
