@@ -2,7 +2,6 @@ import { UsersRepository } from "@/repositories/users-repository";
 import { ViceRepository } from "@/repositories/vice-repository";
 import { UserNotExistError } from "../error/user-error"; 
 import { Vice } from "@prisma/client";
-import { ViceExistError } from "../error/vice-error"; 
 
 
 interface RegisterViceRequest {
