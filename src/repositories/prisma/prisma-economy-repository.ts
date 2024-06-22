@@ -29,5 +29,15 @@ export class PrismaEconomyRepository implements EconomyRepository {
     });
     return updatedEconomy;
   }
+
+  async findEconomyByViceID(viceId: string) {
+    const economy = await prisma.economy.findMany({
+        where: {
+            vice_id: viceId
+        },
+
+    });
+    return economy;
+}
   
 }

@@ -16,6 +16,9 @@ export class PrismaViceRepository implements ViceRepository {
             where: {
                 user_id: userId,
             },
+            include: {
+                economy: true, 
+            },
         });
         return vice;
     }
