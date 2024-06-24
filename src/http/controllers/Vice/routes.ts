@@ -9,6 +9,6 @@ export async function viceRoutes(app: FastifyInstance) {
     app.post('/create/vice/:userId', createVice);
     app.get('/get/vice/:userId', getViceByUSerId);
     app.patch('/time/vice/:viceId', FindTime);
-    app.post('/create/economy/:vice_id', createEconomy)
+    app.post('/create/economy', createEconomy)
     app.patch('/amount/:economy_id', updateAmount)
 }

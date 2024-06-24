@@ -52,4 +52,13 @@ export class PrismaViceRepository implements ViceRepository {
             },
         });
     }
+
+    async findLatest() {
+        const vice = await prisma.vice.findFirst({
+            orderBy: {
+                created_at: 'desc',
+            },
+        });
+        return vice;
+    }
 }

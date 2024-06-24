@@ -5,5 +5,7 @@ export interface ViceRepository {
   findByName(name:string): Promise<Vice | null>
   findViceByIdUser(userId: string): Promise<Vice[]>
   findById(viceId: string): Promise<Vice | null>
-  updateDate(viceId: string, date: string): Promise<void>;
+  updateDate(viceId: string, date: string): Promise<void>; 
+  findLatest(): Promise<Vice | null>;
+
 }
